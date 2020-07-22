@@ -4,8 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-def baseUrl = "https://api.imgur.com"
-def apiVersion = "3"
+def baseUrl = "https://dog.ceo/api/"
 
 android {
     compileSdkVersion 29
@@ -23,10 +22,10 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "BASE_URL", "\"$baseUrl/$apiVersion/\""
+            buildConfigField "String", "BASE_URL", "\"$baseUrl/\""
         }
         release {
-            buildConfigField "String", "BASE_URL", "\"$baseUrl/$apiVersion/\""
+            buildConfigField "String", "BASE_URL", "\"$baseUrl/\""
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
