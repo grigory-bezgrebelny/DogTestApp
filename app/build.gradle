@@ -1,0 +1,99 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def baseUrl = "https://api.imgur.com"
+def apiVersion = "3"
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.bezgrebelnygregory.testapp"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", "\"$baseUrl/$apiVersion/\""
+        }
+        release {
+            buildConfigField "String", "BASE_URL", "\"$baseUrl/$apiVersion/\""
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildToolsVersion '29.0.3'
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
+        }
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    def coroutines = "1.3.6"
+    def lifecycle = "2.2.0"
+    def glide = "4.11.0"
+    def koin = "2.1.6"
+    def retrofit = "2.6.1"
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    // kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.2'
+
+    // material
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "androidx.appcompat:appcompat-resources:1.1.0"
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    // architecture components
+    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle"
+    // over 64k methods
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    // di
+    implementation "org.koin:koin-androidx-scope:$koin"
+    implementation "org.koin:koin-androidx-viewmodel:$koin"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+
+    // glide
+    implementation "com.github.bumptech.glide:glide:$glide"
+    kapt "com.github.bumptech.glide:compiler:$glide"
+
+    // test
+    testImplementation "androidx.test:core-ktx:1.2.0"
+    testImplementation "androidx.test.ext:junit-ktx:1.1.1"
+    testImplementation 'org.robolectric:robolectric:4.3.1'
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+}
