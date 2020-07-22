@@ -10,4 +10,7 @@ fun Module.repoModule() {
             breedRespToBreedModelMapper = get()
         )
     }
+    single<LikeRepo> {
+        LikeRepoImpl()
+    }
 }

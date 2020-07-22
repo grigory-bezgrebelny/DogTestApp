@@ -6,4 +6,5 @@ import org.koin.core.module.Module
 fun Module.dbModule() {
     daoModule()
     single { AppDB.create(context = get()) }
+    single { DbHelper() }
 }
