@@ -6,5 +6,5 @@ import com.bezgrebelnygregory.testapp.core.model.BreedModel
 interface BreedRepo {
     suspend fun getSubBreeds(breed: String, result: ProcessResult<List<String>>)
     suspend fun getImages(breed: String, result: ProcessResult<List<String>>)
-    suspend fun getBreeds(result: ProcessResult<BreedModel>)
+    suspend fun getBreeds(result: ProcessResult<List<BreedModel>>)
 }

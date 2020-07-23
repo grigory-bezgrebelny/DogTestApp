@@ -6,35 +6,31 @@ import com.bezgrebelnygregory.testapp.core.resp.DataResp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-typealias ProcessResult<T> = (ApiModel<T, ApiHelper.NetError>) -> Unit
+typealias ProcessResult<T> = (ApiModel<T>) -> Unit
 
+// todo
 class ApiHelper {
 
     suspend inline fun <T> getResult(
         noinline body: suspend () -> DataResp<T>,
-        noinline result: (ApiModel<T, NetError>) -> Unit
+        noinline result: (ApiModel<T>) -> Unit
     ) {
-        result.invoke(ApiModel.Loading())
+        result.invoke(ApiModel.Loading(true))
         try {
             withContext(Dispatchers.IO) {
 
-                // todo
-                // todo обработка ошибок здесь !!!
-                body.invoke().message
+                val data = body.invoke().message
 
-                result.invoke(ApiModel.Success<T, NetError>(body.invoke().message))
+                withContext(Dispatchers.Main) {
+                    result.invoke(ApiModel.Success<T>(data))
+                }
             }
         } catch (e: Exception) {
             Log.e(TAG, "getResult: ", e)
-            result.invoke(ApiModel.Error(NetError.Error(e.message.toString())))
+            result.invoke(ApiModel.Error(e.message.toString()))
         } finally {
-            result.invoke(ApiModel.Loading())
+            result.invoke(ApiModel.Loading(false))
         }
-    }
-
-    sealed class NetError {
-        object NotFound : NetError() // todo
-        data class Error(val desc: String) : NetError()
     }
 
     companion object {

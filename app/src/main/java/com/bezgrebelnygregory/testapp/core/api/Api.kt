@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface Api {
-    @GET("breed/{breed}}/list")
+    @GET("breed/{breed}/list")
     suspend fun getSubBreeds(@Path("breed") breed: String): DataResp<List<String>>
 
     @GET("breed/{breed}/images")

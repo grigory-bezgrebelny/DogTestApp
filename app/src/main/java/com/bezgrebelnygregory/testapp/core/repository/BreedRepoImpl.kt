@@ -20,9 +20,7 @@ class BreedRepoImpl(
         apiHelper.getResult({ api.getImages(breed) }, result)
     }
 
-    override suspend fun getBreeds(result: ProcessResult<BreedModel>) {
-        apiHelper.getResult({
-            api.getBreeds().map { breedRespToBreedModelMapper.map(it) }
-        }, result)
+    override suspend fun getBreeds(result: ProcessResult<List<BreedModel>>) {
+        apiHelper.getResult({ api.getBreeds().map { breedRespToBreedModelMapper.map(it) } }, result)
     }
 }

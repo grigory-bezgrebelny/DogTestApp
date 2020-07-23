@@ -1,17 +1,15 @@
 package com.bezgrebelnygregory.testapp.app.ui.common
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
-import org.koin.core.module.Module
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity(), BaseView, ContextAware {
 
-    abstract val di: Module
-    abstract val layoutRes: Int
-    abstract val vm: ViewModel
+    override val currentContext: Context
+        get() = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

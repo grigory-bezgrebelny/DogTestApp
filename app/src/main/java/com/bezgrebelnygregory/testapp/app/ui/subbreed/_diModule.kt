@@ -6,7 +6,10 @@ import org.koin.dsl.module
 
 val diModule: Module
     get() = module {
-        viewModel {
-            SubBreedVM()
+        viewModel { (content: SubBreedContent) ->
+            SubBreedVM(
+                content = content,
+                breedRepo = get()
+            )
         }
     }

@@ -1,15 +1,13 @@
-package com.bezgrebelnygregory.testapp.app.ui.subbreed
+package com.bezgrebelnygregory.testapp.app.ui.main.fragments.list
 
 import androidx.lifecycle.viewModelScope
 import com.bezgrebelnygregory.testapp.app.ui.common.EventVM
 import com.bezgrebelnygregory.testapp.app.ui.model.ApiEvent
+import com.bezgrebelnygregory.testapp.core.model.BreedModel
 import com.bezgrebelnygregory.testapp.core.repository.BreedRepo
 import kotlinx.coroutines.launch
 
-class SubBreedVM(
-    val content: SubBreedContent,
-    private val breedRepo: BreedRepo
-) : EventVM<ApiEvent<List<String>>>() {
+class ListVM(private val breedRepo: BreedRepo) : EventVM<ApiEvent<List<BreedModel>>>() {
 
     init {
         fetchData()
@@ -17,7 +15,7 @@ class SubBreedVM(
 
     fun fetchData() {
         viewModelScope.launch {
-            breedRepo.getSubBreeds(content.name) { setEvent(ApiEvent(it)) }
+            breedRepo.getBreeds { setEvent(ApiEvent(it)) }
         }
     }
 }
