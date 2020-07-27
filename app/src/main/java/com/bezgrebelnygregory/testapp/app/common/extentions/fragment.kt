@@ -6,9 +6,9 @@ import androidx.lifecycle.Observer
 import com.bezgrebelnygregory.testapp.app.common.SingleEvent
 import com.bezgrebelnygregory.testapp.app.common.SingleEventObserver
 
-inline fun <T> Fragment.observe(data: LiveData<T?>, crossinline body: (T) -> Unit) {
+inline fun <T> Fragment.observe(data: LiveData<T>, crossinline body: (T) -> Unit) {
     data.observe(viewLifecycleOwner, Observer {
-        if (it != null) body.invoke(it)
+        body.invoke(it)
     })
 }
 
