@@ -3,16 +3,17 @@ package com.bezgrebelnygregory.testapp.app.ui.subbreed
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bezgrebelnygregory.testapp.R
-import com.bezgrebelnygregory.testapp.app.ui.common.BaseActivity
-import com.bezgrebelnygregory.testapp.app.ui.common.delegateadapter.AdapterDelegate
-import com.bezgrebelnygregory.testapp.app.ui.common.delegateadapter.UiModel
-import com.bezgrebelnygregory.testapp.app.ui.common.delegateadapter.item.BreedItem
-import com.bezgrebelnygregory.testapp.app.ui.common.delegateadapter.item.BreedUIModel
-import com.bezgrebelnygregory.testapp.app.ui.common.extentions.getActivityContent
-import com.bezgrebelnygregory.testapp.app.ui.common.extentions.navigateTo
-import com.bezgrebelnygregory.testapp.app.ui.common.extentions.observeEvent
+import com.bezgrebelnygregory.testapp.app.common.BaseActivity
+import com.bezgrebelnygregory.testapp.app.common.delegateadapter.AdapterDelegate
+import com.bezgrebelnygregory.testapp.app.common.delegateadapter.UiModel
+import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedItem
+import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedUIModel
+import com.bezgrebelnygregory.testapp.app.common.extentions.getActivityContent
+import com.bezgrebelnygregory.testapp.app.common.extentions.navigateTo
+import com.bezgrebelnygregory.testapp.app.common.extentions.observeEvent
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesActivity
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesContent
 import com.bezgrebelnygregory.testapp.core.model.ApiModel
@@ -45,6 +46,11 @@ class SubBreedActivity : BaseActivity() {
         setupEvent()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        adapter.cleanUp()
+    }
+
     @SuppressLint("DefaultLocale")
     private fun setupHeader() {
         itemHeader.tvTitle.text = vm.content.name.capitalize()
@@ -60,6 +66,8 @@ class SubBreedActivity : BaseActivity() {
     private fun setupAdapter() {
         rv.adapter = adapter
         rv.layoutManager = LinearLayoutManager(this)
+        rv.setHasFixedSize(true)
+        rv.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     }
 
     private fun setupEvent() {

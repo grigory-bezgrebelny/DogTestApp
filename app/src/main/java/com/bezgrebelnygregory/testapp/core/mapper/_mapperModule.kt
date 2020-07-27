@@ -4,4 +4,5 @@ import org.koin.core.module.Module
 
 fun Module.mapperModule() {
     single<BreedRespToBreedModelMapper> { BreedRespToBreedModelMapperImpl() }
+    single<LikeModelToLikeEntityMapper> { LikeModelToLikeEntityMapperImpl() }
 }

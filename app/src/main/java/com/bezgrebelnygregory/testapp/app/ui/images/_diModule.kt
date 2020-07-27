@@ -6,7 +6,12 @@ import org.koin.dsl.module
 
 val diModule: Module
     get() = module {
-        viewModel {
-            ImagesVM()
+        viewModel { (content: ImagesContent) ->
+            ImagesVM(
+                content = content,
+                breedRepo = get(),
+                likeRepo = get(),
+                cacheImageFileManager = get()
+            )
         }
     }

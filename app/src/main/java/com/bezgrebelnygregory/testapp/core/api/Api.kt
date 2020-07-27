@@ -1,7 +1,7 @@
 package com.bezgrebelnygregory.testapp.core.api
 
-import com.bezgrebelnygregory.testapp.core.resp.BreedResp
-import com.bezgrebelnygregory.testapp.core.resp.DataResp
+import com.bezgrebelnygregory.testapp.core.api.resp.BreedResp
+import com.bezgrebelnygregory.testapp.core.api.resp.DataResp
 import retrofit2.http.GET
 import retrofit2.http.Path
 

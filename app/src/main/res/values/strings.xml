@@ -7,4 +7,6 @@
     <string name="try_connect_later">Try connect later</string>
     <string name="refresh">Refresh</string>
     <string name="error">Error</string>
+    <string name="image_not_found">Image not found</string>
+    <string name="share_image">Share image</string>
 </resources>

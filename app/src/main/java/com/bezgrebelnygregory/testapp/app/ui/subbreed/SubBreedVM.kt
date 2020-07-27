@@ -1,8 +1,8 @@
 package com.bezgrebelnygregory.testapp.app.ui.subbreed
 
 import androidx.lifecycle.viewModelScope
-import com.bezgrebelnygregory.testapp.app.ui.common.EventVM
-import com.bezgrebelnygregory.testapp.app.ui.model.ApiEvent
+import com.bezgrebelnygregory.testapp.app.common.EventVM
+import com.bezgrebelnygregory.testapp.app.model.ApiEvent
 import com.bezgrebelnygregory.testapp.core.repository.BreedRepo
 import kotlinx.coroutines.launch
 

@@ -4,15 +4,16 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bezgrebelnygregory.testapp.R
-import com.bezgrebelnygregory.testapp.app.ui.common.BaseFragment
-import com.bezgrebelnygregory.testapp.app.ui.common.delegateadapter.AdapterDelegate
-import com.bezgrebelnygregory.testapp.app.ui.common.delegateadapter.UiModel
-import com.bezgrebelnygregory.testapp.app.ui.common.delegateadapter.item.BreedItem
-import com.bezgrebelnygregory.testapp.app.ui.common.delegateadapter.item.BreedUIModel
-import com.bezgrebelnygregory.testapp.app.ui.common.extentions.navigateTo
-import com.bezgrebelnygregory.testapp.app.ui.common.extentions.observeEvent
+import com.bezgrebelnygregory.testapp.app.common.BaseFragment
+import com.bezgrebelnygregory.testapp.app.common.delegateadapter.AdapterDelegate
+import com.bezgrebelnygregory.testapp.app.common.delegateadapter.UiModel
+import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedItem
+import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedUIModel
+import com.bezgrebelnygregory.testapp.app.common.extentions.navigateTo
+import com.bezgrebelnygregory.testapp.app.common.extentions.observeEvent
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesActivity
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesContent
 import com.bezgrebelnygregory.testapp.app.ui.subbreed.SubBreedActivity
@@ -67,6 +68,13 @@ class ListFragment : BaseFragment() {
     private fun setupAdapter(view: View) {
         view.rv.adapter = adapter
         view.rv.layoutManager = LinearLayoutManager(requireContext())
+        view.rv.setHasFixedSize(true)
+        view.rv.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
     }
 
     private fun setupEvent(view: View) {
