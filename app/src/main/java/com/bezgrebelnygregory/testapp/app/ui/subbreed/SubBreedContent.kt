@@ -5,5 +5,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class SubBreedContent(
-    val name: String
+    val breed1: String
 ) : Parcelable

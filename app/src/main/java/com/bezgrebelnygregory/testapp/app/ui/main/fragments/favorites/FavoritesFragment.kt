@@ -12,7 +12,10 @@ import com.bezgrebelnygregory.testapp.app.common.delegateadapter.AdapterDelegate
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.UiModel
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedItem
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedUIModel
+import com.bezgrebelnygregory.testapp.app.common.extentions.navigateTo
 import com.bezgrebelnygregory.testapp.app.common.extentions.observe
+import com.bezgrebelnygregory.testapp.app.ui.favoriteimages.FavoriteImagesActivity
+import com.bezgrebelnygregory.testapp.app.ui.favoriteimages.FavoriteImagesContent
 import com.bezgrebelnygregory.testapp.core.model.BreedModel
 import kotlinx.android.synthetic.main.fragment_favorites.view.*
 import kotlinx.android.synthetic.main.item_header.view.*
@@ -29,7 +32,7 @@ class FavoritesFragment : BaseFragment() {
 
     private val adapter = AdapterDelegate<UiModel>(
         BreedItem<BreedModel> {
-//            navigateTo<ImagesActivity>(ImagesContent(it.parentModel.name))
+            navigateTo<FavoriteImagesActivity>(FavoriteImagesContent(it.parentModel.name))
         }
     )
 

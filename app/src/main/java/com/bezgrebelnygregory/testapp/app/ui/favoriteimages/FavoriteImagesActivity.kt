@@ -1,4 +1,4 @@
-package com.bezgrebelnygregory.testapp.app.ui.images
+package com.bezgrebelnygregory.testapp.app.ui.favoriteimages
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -16,18 +16,19 @@ import com.bezgrebelnygregory.testapp.app.common.extentions.getActivityContent
 import com.bezgrebelnygregory.testapp.app.common.extentions.observeEvent
 import com.bezgrebelnygregory.testapp.app.common.extentions.observeNull
 import com.bezgrebelnygregory.testapp.core.model.ImageModel
-import kotlinx.android.synthetic.main.activity_images.*
+import kotlinx.android.synthetic.main.activity_favorite_images.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.module.Module
 import org.koin.core.parameter.parametersOf
 
-class ImagesActivity : BaseActivity() {
+class FavoriteImagesActivity : BaseActivity() {
 
     override val di: Module
         get() = diModule
     override val layoutRes: Int
-        get() = R.layout.activity_images
-    override val vm: ImagesVM by viewModel { parametersOf(getActivityContent()) }
+        get() = R.layout.activity_favorite_images
+    override val vm: FavoriteImagesVM by viewModel { parametersOf(getActivityContent()) }
+
 
     private val adapter = AdapterDelegate<UiModel>(
         ImageItem<ImageModel> { vm.like(it.parentModel) }
@@ -50,7 +51,7 @@ class ImagesActivity : BaseActivity() {
 
     @SuppressLint("DefaultLocale")
     private fun setupHeader() {
-        tvTitle.text = (vm.content.breed2 ?: vm.content.breed1).capitalize()
+        tvTitle.text = vm.content.name.capitalize()
         ivBack.setOnClickListener { onBackPressed() }
     }
 
@@ -67,9 +68,6 @@ class ImagesActivity : BaseActivity() {
         ivShare.setOnClickListener {
             share()
         }
-        btnRefresh.setOnClickListener {
-            vm.fetchData()
-        }
     }
 
     private fun share() {
@@ -80,6 +78,7 @@ class ImagesActivity : BaseActivity() {
     private fun setupData() {
         observeNull(vm.dataList) {
             adapter.dataList = toUiModel(it)
+            tvListIsEmpty.isVisible = it.isEmpty()
         }
     }
 
@@ -89,14 +88,6 @@ class ImagesActivity : BaseActivity() {
                 is Event.Share -> {
                     if (it.uri != null) showShareImageDialog(it.uri)
                     else showErrorAlert(getString(R.string.image_not_found))
-                }
-                is Event.Loading -> {
-                    if (it.value) btnRefresh.isVisible = false
-                    pg.isVisible = it.value
-                }
-                is Event.Error -> {
-                    btnRefresh.isVisible = true
-                    showErrorAlert(it.desc)
                 }
             }
         }

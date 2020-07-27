@@ -4,7 +4,7 @@ import com.bezgrebelnygregory.testapp.app.common.IdModel
 import com.bezgrebelnygregory.testapp.core.api.Api
 import com.bezgrebelnygregory.testapp.core.api.ApiHelper
 import com.bezgrebelnygregory.testapp.core.api.ProcessResult
-import com.bezgrebelnygregory.testapp.core.common.DataSource
+import com.bezgrebelnygregory.testapp.core.common.NetDataSource
 import com.bezgrebelnygregory.testapp.core.db.dao.LikeDao
 import com.bezgrebelnygregory.testapp.core.mapper.BreedRespToBreedModelMapper
 import com.bezgrebelnygregory.testapp.core.model.ApiModel
@@ -28,10 +28,11 @@ class BreedRepoImpl(
 
     override fun getImages(
         scope: CoroutineScope,
-        breed: String,
+        breed1: String,
+        breed2: String?,
         result: ProcessResult<List<ImageModel>>
-    ): DataSource<List<ImageModel>> =
-        object : DataSource<List<ImageModel>>() {
+    ): NetDataSource<List<ImageModel>> =
+        object : NetDataSource<List<ImageModel>>() {
 
             private var likeList: List<LikeModel> = listOf()
             private var imageList: List<String> = listOf()
@@ -43,7 +44,7 @@ class BreedRepoImpl(
 
             private fun collectDataFromDB() {
                 scope.launch {
-                    likeDao.getListByBreedFlow(breed).collect {
+                    likeDao.getListByBreedFlow(breed2 ?: breed1).collect {
                         likeList = it
                         updateData()
                     }
@@ -52,7 +53,10 @@ class BreedRepoImpl(
 
             override fun fetchData() {
                 scope.launch {
-                    apiHelper.getResult({ api.getImages(breed) }) {
+                    apiHelper.getResult({
+                        if (breed2 == null) api.getImages(breed1)
+                        else api.getSubBreedsImages(breed1, breed2)
+                    }) {
                         when (it) {
                             is ApiModel.Success -> {
                                 imageList = it.data

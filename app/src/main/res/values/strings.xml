@@ -13,4 +13,5 @@
     <string name="error">Error</string>
     <string name="image_not_found">Image not found</string>
     <string name="share_image">Share image</string>
+    <string name="list_is_empty">List is empty</string>
 </resources>

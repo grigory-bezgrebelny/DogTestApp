@@ -1,40 +1,28 @@
-package com.bezgrebelnygregory.testapp.app.ui.images
+package com.bezgrebelnygregory.testapp.app.ui.favoriteimages
 
 import androidx.lifecycle.viewModelScope
 import com.bezgrebelnygregory.testapp.app.common.EventVM
 import com.bezgrebelnygregory.testapp.app.manager.CacheImageFileManager
 import com.bezgrebelnygregory.testapp.app.mapper.ImageModelToLikeModelMapperImpl
-import com.bezgrebelnygregory.testapp.core.model.ApiModel
 import com.bezgrebelnygregory.testapp.core.model.ImageModel
-import com.bezgrebelnygregory.testapp.core.repository.BreedRepo
 import com.bezgrebelnygregory.testapp.core.repository.LikeRepo
 import kotlinx.coroutines.launch
 
-class ImagesVM(
-    val content: ImagesContent,
-    breedRepo: BreedRepo,
+class FavoriteImagesVM(
+    val content: FavoriteImagesContent,
     private val likeRepo: LikeRepo,
     private val cacheImageFileManager: CacheImageFileManager
 ) : EventVM<Event>() {
 
-    private val dataSource = breedRepo.getImages(viewModelScope, content.breed1, content.breed2) {
-        when (it) {
-            is ApiModel.Loading -> setEvent(Event.Loading(it.value))
-            is ApiModel.Error -> setEvent(Event.Error(it.desc))
-        }
-    }
+    private val dataSource = likeRepo.getListByBreed(viewModelScope, content.name)
     val dataList = dataSource.dataList
 
     fun like(data: ImageModel) {
         viewModelScope.launch {
-            val model = ImageModelToLikeModelMapperImpl(content.breed2 ?: content.breed1).map(data)
-            if (data.idNotSet) likeRepo.insert(model)
-            else likeRepo.delete(model)
+            val model = ImageModelToLikeModelMapperImpl(content.name).map(data)
+            if (data.isFavorite) likeRepo.delete(model)
+            else likeRepo.insert(model)
         }
-    }
-
-    fun fetchData() {
-        dataSource.fetchData()
     }
 
     fun getImageUri(position: Int) {

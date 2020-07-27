@@ -1,7 +1,9 @@
 package com.bezgrebelnygregory.testapp.core.model
 
+import com.bezgrebelnygregory.testapp.app.common.IdModel
+
 data class LikeModel(
-    val id: Long,
+    override val id: Long,
     val breed: String,
     val image: String
-)
+) : IdModel

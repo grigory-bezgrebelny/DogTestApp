@@ -3,6 +3,6 @@
 
     <cache-path
         name="app_cache"
-        path="./sharedImages" />
+        path="./shared_images" />
 
 </paths>

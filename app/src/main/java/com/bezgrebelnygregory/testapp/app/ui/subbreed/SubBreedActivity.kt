@@ -33,7 +33,7 @@ class SubBreedActivity : BaseActivity() {
 
     private val adapter = AdapterDelegate<UiModel>(
         BreedItem<String> {
-            navigateTo<ImagesActivity>(ImagesContent(it.parentModel))
+            navigateTo<ImagesActivity>(ImagesContent(vm.content.breed1, it.parentModel))
         }
     )
 
@@ -53,7 +53,7 @@ class SubBreedActivity : BaseActivity() {
 
     @SuppressLint("DefaultLocale")
     private fun setupHeader() {
-        itemHeader.tvTitle.text = vm.content.name.capitalize()
+        itemHeader.tvTitle.text = vm.content.breed1.capitalize()
         itemHeader.ivBack.setOnClickListener { onBackPressed() }
     }
 

@@ -17,7 +17,7 @@ class SubBreedVM(
 
     fun fetchData() {
         viewModelScope.launch {
-            breedRepo.getSubBreeds(content.name) { setEvent(ApiEvent(it)) }
+            breedRepo.getSubBreeds(content.breed1) { setEvent(ApiEvent(it)) }
         }
     }
 }

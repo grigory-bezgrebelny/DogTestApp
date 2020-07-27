@@ -9,8 +9,6 @@ abstract class DataSource<T> {
     val dataList: LiveData<T>
         get() = _dataList
 
-    abstract fun fetchData()
-
     protected fun setValue(value: T) {
         _dataList.postValue(value)
     }

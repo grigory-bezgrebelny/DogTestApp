@@ -36,7 +36,7 @@ class ListFragment : BaseFragment() {
     private val adapter = AdapterDelegate<UiModel>(
         BreedItem<BreedModel> {
             if (it.parentModel.count > 0) navigateTo<SubBreedActivity>(SubBreedContent(it.parentModel.name))
-            else navigateTo<ImagesActivity>(ImagesContent(it.parentModel.name))
+            else navigateTo<ImagesActivity>(ImagesContent(it.parentModel.name, null))
         }
     )
 

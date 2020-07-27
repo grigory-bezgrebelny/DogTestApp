@@ -35,6 +35,13 @@ interface LikeDao {
     )
     suspend fun getListByBreed(breed: String): List<LikeModel>
 
+    @Query(
+        """select *
+        from `like`
+        where breed = :breed"""
+    )
+    fun getListByBreedLive(breed: String): LiveData<List<LikeModel>>
+
     @Insert
     fun insert(data: LikeEntity): Long
 
