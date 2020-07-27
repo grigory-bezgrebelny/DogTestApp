@@ -2,7 +2,6 @@ package com.bezgrebelnygregory.testapp.app.ui.favoriteimages
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -77,7 +76,6 @@ class FavoriteImagesActivity : BaseActivity() {
     private fun setupData() {
         observe(vm.dataList) {
             adapter.dataList = toUiModel(it)
-            tvListIsEmpty.isVisible = it.isEmpty()
         }
     }
 

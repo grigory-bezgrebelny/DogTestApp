@@ -41,7 +41,7 @@ class FavoritesFragment : BaseFragment() {
 
         setupHeader(view)
         setupAdapter(view)
-        setupData()
+        setupData(view)
     }
 
     override fun onDestroy() {
@@ -66,9 +66,10 @@ class FavoritesFragment : BaseFragment() {
         )
     }
 
-    private fun setupData() {
+    private fun setupData(view: View) {
         observe(vm.dataList) {
             adapter.dataList = toUiModel(it)
+            view.tvListIsEmpty.isVisible = it.isEmpty()
         }
     }
 
