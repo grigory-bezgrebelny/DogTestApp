@@ -12,11 +12,11 @@ import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedItem
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedUIModel
 import com.bezgrebelnygregory.testapp.app.common.extentions.getActivityContent
 import com.bezgrebelnygregory.testapp.app.common.extentions.navigateTo
+import com.bezgrebelnygregory.testapp.app.common.extentions.observe
 import com.bezgrebelnygregory.testapp.app.common.extentions.observeEvent
 import com.bezgrebelnygregory.testapp.app.common.ui.BaseActivity
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesActivity
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesContent
-import com.bezgrebelnygregory.testapp.core.model.ApiModel
 import kotlinx.android.synthetic.main.activity_sub_breed.*
 import kotlinx.android.synthetic.main.item_header.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,6 +43,7 @@ class SubBreedActivity : BaseActivity() {
         setupHeader()
         setupView()
         setupAdapter()
+        setupData()
         setupEvent()
     }
 
@@ -70,19 +71,9 @@ class SubBreedActivity : BaseActivity() {
         rv.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     }
 
-    private fun setupEvent() {
-        observeEvent(vm.event) {
-            when (it.event) {
-                is ApiModel.Success -> adapter.dataList = toUiModel(it.event.data)
-                is ApiModel.Loading -> {
-                    if (it.event.value) btnRefresh.isVisible = false
-                    pg.isVisible = it.event.value
-                }
-                is ApiModel.Error -> {
-                    btnRefresh.isVisible = true
-                    showErrorAlert(it.event.desc)
-                }
-            }
+    private fun setupData() {
+        observe(vm.dataList) {
+            adapter.dataList = toUiModel(it)
         }
     }
 
@@ -94,6 +85,21 @@ class SubBreedActivity : BaseActivity() {
                 data.capitalize(),
                 data
             )
+        }
+    }
+
+    private fun setupEvent() {
+        observeEvent(vm.event) {
+            when (it) {
+                is Event.Loading -> {
+                    if (it.value) btnRefresh.isVisible = false
+                    pg.isVisible = it.value
+                }
+                is Event.Error -> {
+                    btnRefresh.isVisible = true
+                    showErrorAlert(it.desc)
+                }
+            }
         }
     }
 }

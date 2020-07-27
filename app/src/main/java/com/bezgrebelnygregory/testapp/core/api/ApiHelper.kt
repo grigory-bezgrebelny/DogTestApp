@@ -3,6 +3,7 @@ package com.bezgrebelnygregory.testapp.core.api
 import android.util.Log
 import com.bezgrebelnygregory.testapp.core.api.resp.DataResp
 import com.bezgrebelnygregory.testapp.core.model.ApiModel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -24,6 +25,8 @@ class ApiHelper {
                         result.invoke(ApiModel.Success(data))
                     }
                 }
+            } catch (e: CancellationException) {
+                Log.e(TAG, "getResult: ", e)
             } catch (e: Exception) {
                 Log.e(TAG, "getResult: ", e)
                 result.invoke(ApiModel.Error(e.message.toString()))

@@ -29,7 +29,6 @@ class FavoriteImagesActivity : BaseActivity() {
         get() = R.layout.activity_favorite_images
     override val vm: FavoriteImagesVM by viewModel { parametersOf(getActivityContent()) }
 
-
     private val adapter = AdapterDelegate<UiModel>(
         ImageItem<ImageModel> { vm.like(it.parentModel) }
     )

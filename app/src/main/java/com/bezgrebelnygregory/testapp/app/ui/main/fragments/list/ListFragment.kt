@@ -12,13 +12,13 @@ import com.bezgrebelnygregory.testapp.app.common.delegateadapter.UiModel
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedItem
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedUIModel
 import com.bezgrebelnygregory.testapp.app.common.extentions.navigateTo
+import com.bezgrebelnygregory.testapp.app.common.extentions.observe
 import com.bezgrebelnygregory.testapp.app.common.extentions.observeEvent
 import com.bezgrebelnygregory.testapp.app.common.ui.BaseFragment
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesActivity
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesContent
 import com.bezgrebelnygregory.testapp.app.ui.subbreed.SubBreedActivity
 import com.bezgrebelnygregory.testapp.app.ui.subbreed.SubBreedContent
-import com.bezgrebelnygregory.testapp.core.model.ApiModel
 import com.bezgrebelnygregory.testapp.core.model.BreedModel
 import kotlinx.android.synthetic.main.fragment_list.view.*
 import kotlinx.android.synthetic.main.item_header.view.*
@@ -46,6 +46,7 @@ class ListFragment : BaseFragment() {
         setupHeader(view)
         setupView(view)
         setupAdapter(view)
+        setupData()
         setupEvent(view)
     }
 
@@ -77,17 +78,22 @@ class ListFragment : BaseFragment() {
         )
     }
 
+    private fun setupData() {
+        observe(vm.dataList) {
+            adapter.dataList = toUiModel(it)
+        }
+    }
+
     private fun setupEvent(view: View) {
         observeEvent(vm.event) {
-            when (it.event) {
-                is ApiModel.Success -> adapter.dataList = toUiModel(it.event.data)
-                is ApiModel.Loading -> {
-                    if (it.event.value) view.btnRefresh.isVisible = false
-                    view.pg.isVisible = it.event.value
+            when (it) {
+                is Event.Loading -> {
+                    if (it.value) view.btnRefresh.isVisible = false
+                    view.pg.isVisible = it.value
                 }
-                is ApiModel.Error -> {
+                is Event.Error -> {
                     view.btnRefresh.isVisible = true
-                    showErrorAlert(it.event.desc)
+                    showErrorAlert(it.desc)
                 }
             }
         }
