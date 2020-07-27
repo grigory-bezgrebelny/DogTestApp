@@ -1,4 +1,4 @@
-package com.bezgrebelnygregory.testapp.app.common
+package com.bezgrebelnygregory.testapp.app.common.ui
 
 import androidx.lifecycle.ViewModel
 import org.koin.core.module.Module

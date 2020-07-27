@@ -6,15 +6,9 @@ import androidx.lifecycle.Observer
 import com.bezgrebelnygregory.testapp.app.common.SingleEvent
 import com.bezgrebelnygregory.testapp.app.common.SingleEventObserver
 
-inline fun <T> AppCompatActivity.observe(data: LiveData<T?>, crossinline body: (T) -> Unit) {
+inline fun <T> AppCompatActivity.observe(data: LiveData<T>, crossinline body: (T) -> Unit) {
     data.observe(this, Observer {
-        if (it != null) body.invoke(it)
-    })
-}
-
-inline fun <T> AppCompatActivity.observeNull(data: LiveData<T>, crossinline body: (T) -> Unit) {
-    data.observe(this, Observer {
-        if (it != null) body.invoke(it)
+        body.invoke(it)
     })
 }
 

@@ -21,7 +21,7 @@ class ApiHelper {
                     val data = body.invoke().message
                     Log.d(TAG, data.toString())
                     withContext(Dispatchers.Main) {
-                        result.invoke(ApiModel.Success<T>(data))
+                        result.invoke(ApiModel.Success(data))
                     }
                 }
             } catch (e: Exception) {

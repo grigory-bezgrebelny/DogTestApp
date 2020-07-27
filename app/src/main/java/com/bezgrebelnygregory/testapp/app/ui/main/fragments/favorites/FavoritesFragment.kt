@@ -7,13 +7,13 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bezgrebelnygregory.testapp.R
-import com.bezgrebelnygregory.testapp.app.common.BaseFragment
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.AdapterDelegate
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.UiModel
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedItem
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedUIModel
 import com.bezgrebelnygregory.testapp.app.common.extentions.navigateTo
 import com.bezgrebelnygregory.testapp.app.common.extentions.observe
+import com.bezgrebelnygregory.testapp.app.common.ui.BaseFragment
 import com.bezgrebelnygregory.testapp.app.ui.favoriteimages.FavoriteImagesActivity
 import com.bezgrebelnygregory.testapp.app.ui.favoriteimages.FavoriteImagesContent
 import com.bezgrebelnygregory.testapp.core.model.BreedModel
@@ -77,8 +77,9 @@ class FavoritesFragment : BaseFragment() {
         return list.mapIndexed { i, data ->
 
             val photosCountText =
-                if (data.count > 0) requireContext().getString(
-                    R.string.photos_format,
+                if (data.count > 0) resources.getQuantityString(
+                    R.plurals.photos_format,
+                    data.count,
                     data.count
                 ) else ""
 

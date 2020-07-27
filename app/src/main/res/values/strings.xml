@@ -4,14 +4,28 @@
     <string name="list">List</string>
     <string name="breed">Breed</string>
 
-    <!--    todo -->
-    <string name="sub_breed">\u0020(%d subbreeds)</string>
-    <string name="photos_format">\u0020(%d photos)</string>
-
-    <string name="try_connect_later">Try connect later</string>
     <string name="refresh">Refresh</string>
     <string name="error">Error</string>
     <string name="image_not_found">Image not found</string>
     <string name="share_image">Share image</string>
     <string name="list_is_empty">List is empty</string>
+
+    <plurals name="sub_breed_format">
+        <item quantity="zero">\u0020(%d subbreeds)</item>
+        <item quantity="one">\u0020(%d subbreed)</item>
+        <item quantity="two">\u0020(%d subbreeds)</item>
+        <item quantity="few">\u0020(%d subbreeds)</item>
+        <item quantity="many">\u0020(%d subbreeds)</item>
+        <item quantity="other">\u0020(%d subbreeds)</item>
+    </plurals>
+
+    <plurals name="photos_format">
+        <item quantity="zero">\u0020(%d photos)</item>
+        <item quantity="one">\u0020(%d photo)</item>
+        <item quantity="two">\u0020(%d photos)</item>
+        <item quantity="few">\u0020(%d photos)</item>
+        <item quantity="many">\u0020(%d photos)</item>
+        <item quantity="other">\u0020(%d photos)</item>
+    </plurals>
+
 </resources>

@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.bezgrebelnygregory.testapp.R
-import com.bezgrebelnygregory.testapp.app.common.BaseActivity
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.AdapterDelegate
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.UiModel
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.ImageItem
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.ImageUiModel
 import com.bezgrebelnygregory.testapp.app.common.extentions.getActivityContent
+import com.bezgrebelnygregory.testapp.app.common.extentions.observe
 import com.bezgrebelnygregory.testapp.app.common.extentions.observeEvent
-import com.bezgrebelnygregory.testapp.app.common.extentions.observeNull
+import com.bezgrebelnygregory.testapp.app.common.ui.BaseActivity
 import com.bezgrebelnygregory.testapp.core.model.ImageModel
 import kotlinx.android.synthetic.main.activity_images.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -78,7 +78,7 @@ class ImagesActivity : BaseActivity() {
     }
 
     private fun setupData() {
-        observeNull(vm.dataList) {
+        observe(vm.dataList) {
             adapter.dataList = toUiModel(it)
         }
     }

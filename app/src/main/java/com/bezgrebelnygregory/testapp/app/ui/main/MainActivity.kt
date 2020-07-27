@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.bezgrebelnygregory.testapp.R
-import com.bezgrebelnygregory.testapp.app.common.BaseActivity
+import com.bezgrebelnygregory.testapp.app.common.ui.BaseActivity
 import com.bezgrebelnygregory.testapp.app.ui.main.fragments.favorites.FavoritesFragment
 import com.bezgrebelnygregory.testapp.app.ui.main.fragments.list.ListFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView

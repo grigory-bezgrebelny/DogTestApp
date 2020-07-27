@@ -1,12 +1,15 @@
-package com.bezgrebelnygregory.testapp.app.common
+package com.bezgrebelnygregory.testapp.app.common.ui
 
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bezgrebelnygregory.testapp.app.common.ContextAware
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 
-abstract class BaseActivity : AppCompatActivity(), BaseView, ContextAware {
+abstract class BaseActivity : AppCompatActivity(),
+    BaseView,
+    ContextAware {
 
     override val currentContext: Context
         get() = this

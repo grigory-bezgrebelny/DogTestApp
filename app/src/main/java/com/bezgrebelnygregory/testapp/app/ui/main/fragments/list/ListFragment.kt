@@ -7,13 +7,13 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bezgrebelnygregory.testapp.R
-import com.bezgrebelnygregory.testapp.app.common.BaseFragment
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.AdapterDelegate
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.UiModel
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedItem
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedUIModel
 import com.bezgrebelnygregory.testapp.app.common.extentions.navigateTo
 import com.bezgrebelnygregory.testapp.app.common.extentions.observeEvent
+import com.bezgrebelnygregory.testapp.app.common.ui.BaseFragment
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesActivity
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesContent
 import com.bezgrebelnygregory.testapp.app.ui.subbreed.SubBreedActivity
@@ -98,8 +98,9 @@ class ListFragment : BaseFragment() {
         return list.mapIndexed { i, data ->
 
             val subBreedCountText =
-                if (data.count > 0) requireContext().getString(
-                    R.string.sub_breed,
+                if (data.count > 0) resources.getQuantityString(
+                    R.plurals.sub_breed_format,
+                    data.count,
                     data.count
                 ) else ""
 

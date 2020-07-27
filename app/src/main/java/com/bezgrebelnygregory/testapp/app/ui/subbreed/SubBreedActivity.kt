@@ -6,7 +6,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bezgrebelnygregory.testapp.R
-import com.bezgrebelnygregory.testapp.app.common.BaseActivity
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.AdapterDelegate
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.UiModel
 import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedItem
@@ -14,6 +13,7 @@ import com.bezgrebelnygregory.testapp.app.common.delegateadapter.item.BreedUIMod
 import com.bezgrebelnygregory.testapp.app.common.extentions.getActivityContent
 import com.bezgrebelnygregory.testapp.app.common.extentions.navigateTo
 import com.bezgrebelnygregory.testapp.app.common.extentions.observeEvent
+import com.bezgrebelnygregory.testapp.app.common.ui.BaseActivity
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesActivity
 import com.bezgrebelnygregory.testapp.app.ui.images.ImagesContent
 import com.bezgrebelnygregory.testapp.core.model.ApiModel

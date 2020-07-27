@@ -12,4 +12,4 @@ inline fun <reified T : FragmentActivity> ContextAware.navigateTo(data: Parcelab
 }
 
 fun <R : Parcelable> FragmentActivity.getActivityContent(): R? =
-    intent.getParcelableExtra<R>(this::class.java.name)
+    intent.getParcelableExtra(this::class.java.name)
