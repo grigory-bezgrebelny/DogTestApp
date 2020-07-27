@@ -92,7 +92,6 @@ class SubBreedActivity : BaseActivity() {
             BreedUIModel(
                 i.toLong(),
                 data.capitalize(),
-                0,
                 data
             )
         }

@@ -96,10 +96,16 @@ class ListFragment : BaseFragment() {
     @SuppressLint("DefaultLocale")
     private fun toUiModel(list: List<BreedModel>): List<UiModel> {
         return list.mapIndexed { i, data ->
+
+            val subBreedCountText =
+                if (data.count > 0) requireContext().getString(
+                    R.string.sub_breed,
+                    data.count
+                ) else ""
+
             BreedUIModel(
                 i.toLong(),
-                data.name.capitalize(),
-                data.count,
+                (data.name + subBreedCountText).capitalize(),
                 data
             )
         }

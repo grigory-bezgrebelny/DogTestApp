@@ -3,7 +3,11 @@
     <string name="favorites">Favorites</string>
     <string name="list">List</string>
     <string name="breed">Breed</string>
+
+    <!--    todo -->
     <string name="sub_breed">\u0020(%d subbreeds)</string>
+    <string name="photos_format">\u0020(%d photos)</string>
+
     <string name="try_connect_later">Try connect later</string>
     <string name="refresh">Refresh</string>
     <string name="error">Error</string>

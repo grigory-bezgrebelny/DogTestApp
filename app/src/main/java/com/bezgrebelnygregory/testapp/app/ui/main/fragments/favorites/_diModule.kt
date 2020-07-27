@@ -6,5 +6,7 @@ import org.koin.dsl.module
 
 val diModule: Module
     get() = module(override = true) {
-        viewModel { FavoritesVM() }
+        viewModel {
+            FavoritesVM(likeRepo = get())
+        }
     }

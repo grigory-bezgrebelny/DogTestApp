@@ -1,8 +1,10 @@
 package com.bezgrebelnygregory.testapp.core.repository
 
+import androidx.lifecycle.LiveData
 import com.bezgrebelnygregory.testapp.core.db.DbHelper
 import com.bezgrebelnygregory.testapp.core.db.dao.LikeDao
 import com.bezgrebelnygregory.testapp.core.mapper.LikeModelToLikeEntityMapper
+import com.bezgrebelnygregory.testapp.core.model.BreedModel
 import com.bezgrebelnygregory.testapp.core.model.DataModel
 import com.bezgrebelnygregory.testapp.core.model.LikeModel
 import kotlinx.coroutines.flow.Flow
@@ -12,6 +14,9 @@ class LikeRepoImpl(
     private val dao: LikeDao,
     private val likeModelToLikeEntityMapper: LikeModelToLikeEntityMapper
 ) : LikeRepo {
+
+    override fun getBreedList(): LiveData<List<BreedModel>> =
+        dbHelper.getResultLive { dao.getBreedList() }
 
     override fun getListByBreedFlow(breed: String): Flow<List<LikeModel>>? =
         dbHelper.getResultFlow { dao.getListByBreedFlow(breed) }

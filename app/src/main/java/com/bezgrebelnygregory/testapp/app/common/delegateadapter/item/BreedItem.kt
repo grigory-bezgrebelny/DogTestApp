@@ -15,9 +15,7 @@ class BreedItem<T>(private var click: ((BreedUIModel<T>) -> Unit)?) :
     override fun <T : UiModel> isModel(model: T): Boolean = model is BreedUIModel<*>
 
     override fun bindView(view: View, data: BreedUIModel<T>) {
-        val subBreedCountText =
-            if (data.count > 0) view.context.getString(R.string.sub_breed, data.count) else ""
-        view.tv.text = data.name + subBreedCountText
+        view.tv.text = data.name
     }
 
     override fun bindClick(view: View, data: BreedUIModel<T>) {
@@ -37,6 +35,5 @@ class BreedItem<T>(private var click: ((BreedUIModel<T>) -> Unit)?) :
 data class BreedUIModel<T>(
     override val id: Long,
     val name: String,
-    val count: Int,
     val parentModel: T
 ) : UiModel
